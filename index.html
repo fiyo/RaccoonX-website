@@ -560,7 +560,7 @@
 <div class="tb-inner reveal glow">
 <div class="tb-main">
 <div class="tb-eyebrow"><i class="fas fa-cloud-download-alt"></i> 已被全球用户使用</div>
-<div class="tb-num"><span class="val" data-count="3651" data-fmt="comma" data-suffix="+" id="dockerPulls">0</span></div>
+<div class="tb-num"><span class="val" id="dockerPulls">0</span></div>
 <div class="tb-label">Docker 镜像累计拉取</div>
 <div class="tb-sub">DBA 与运维团队正在用 RaccoonX 守护他们的数据库</div>
 </div>
@@ -1154,31 +1154,39 @@ python web_ui.py</pre>
       }
       document.querySelectorAll('[data-count]').forEach(function(el){ runCount(el); });
 
-      // ---- Docker pulls: read from local JSON (精确数字), fallback shields.io ----
+            // ---- Docker pulls: 实时精确值优先（CORS 代理直连 Docker Hub API），本地 JSON 缓存兜底，shields.io 最后兜底 ----
       (function(){
         var el = document.getElementById('dockerPulls');
         if(!el) return;
         function updatePulls(n){
-          if(n&&n>0) animateNumber(el, n, {comma:true, dur:1800});
+          if(n && n>0) animateNumber(el, n, {comma:true, dur:1800});
         }
-        // 优先从本地 JSON 读取精确数字
-        fetch('docker-stats.json')
-          .then(function(r){ return r.json(); })
-          .then(function(d){ updatePulls(d&&d.pull_count); })
+        function parseAbbrev(s){
+          if(typeof s !== 'string') return null;
+          var m = s.trim().toLowerCase().match(/^([\d.]+)\s*([kmb])?$/);
+          if(!m) return null;
+          var n = parseFloat(m[1]); if(isNaN(n)) return null;
+          if(m[2]==='k') n*=1e3; else if(m[2]==='m') n*=1e6; else if(m[2]==='b') n*=1e9;
+          return Math.round(n);
+        }
+        var repo = 'jackge12345/dbcheck';
+        var api = 'https://hub.docker.com/v2/repositories/' + repo + '/';
+        // 1) 实时精确值：经 CORS 代理直连 Docker Hub API
+        fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(api))
+          .then(function(r){ if(!r.ok) throw new Error('proxy'); return r.json(); })
+          .then(function(d){ if(d && d.pull_count) return updatePulls(d.pull_count); throw new Error('no pull_count'); })
           .catch(function(){
-            // fallback: shields.io (近似值)
-            function parseAbbrev(s){
-              if(typeof s !== 'string') return null;
-              var m = s.trim().toLowerCase().match(/^([\d.]+)\s*([kmb])?$/);
-              if(!m) return null;
-              var n = parseFloat(m[1]); if(isNaN(n)) return null;
-              if(m[2]==='k') n*=1e3; else if(m[2]==='m') n*=1e6; else if(m[2]==='b') n*=1e9;
-              return Math.round(n);
-            }
-            fetch('https://img.shields.io/docker/pulls/jackge12345/dbcheck.json')
-              .then(function(r){return r.json();})
-              .then(function(d){ var n=parseAbbrev(d&&d.value); updatePulls(n); })
-              .catch(function(){});
+            // 2) 本地精确缓存（由 CI 定时刷新 docker-stats.json）
+            fetch('docker-stats.json')
+              .then(function(r){ return r.json(); })
+              .then(function(d){ updatePulls(d && d.pull_count); })
+              .catch(function(){
+                // 3) 兜底：shields.io 近似值
+                fetch('https://img.shields.io/docker/pulls/' + repo + '.json')
+                  .then(function(r){return r.json();})
+                  .then(function(d){ var n=parseAbbrev(d&&d.value); updatePulls(n); })
+                  .catch(function(){});
+              });
           });
       })();
 
