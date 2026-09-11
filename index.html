@@ -4,13 +4,13 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>RaccoonX · 开源数据库智能巡检与实时监控平台</title>
-<meta content="RaccoonX v26.9.11.0 是一款开源、跨平台、支持 21 种主流与国产数据库的智能巡检与实时监控平台。内置 344+ 巡检规则、实时监控大屏、本地 AI 诊断与一键报告，让数据库运维可知、可控、可防。" name="description"/>
+<meta content="RaccoonX v26.9.11.0 是一款开源、跨平台、支持 21 种主流与国产数据库的智能巡检与实时监控平台。内置 344+ 巡检规则、实时监控大屏、本地 AI 诊断、SQL 审核与工作流编排，让数据库运维可知、可控、可防。" name="description"/>
 <meta content="数据库巡检, 数据库监控, 信创, 国产化替代, DBA工具, Kingbase, 达梦, 优炫, UXDB, Oracle, MySQL, PostgreSQL, 开源, 数据库可观测性" name="keywords"/>
 <meta content="Jack Ge (fiyo)" name="author"/>
 <meta content="index, follow" name="robots"/>
 <!-- Open Graph -->
 <meta content="RaccoonX · 开源数据库巡检与实时监控平台" property="og:title"/>
-<meta content="开源跨平台数据库智能巡检与实时监控平台 v26.9.11.0，本地 AI 诊断、数据不出网。" property="og:description"/>
+<meta content="开源跨平台数据库智能巡检与实时监控平台 v26.9.11.0，本地 AI 诊断、SQL 审核与工作流编排，数据不出网。" property="og:description"/>
 <meta content="website" property="og:type"/>
 <meta content="https://fiyo.github.io/DBCheck" property="og:url"/>
 <meta content="https://fiyo.github.io/DBCheck/dbcheck_logo_banner.png" property="og:image"/>
@@ -496,12 +496,14 @@
 <div class="hero-copy">
 <div class="hero-badge"><span class="pulse"></span> 社区版 · 开源 Apache 2.0 协议 · <span id="verBadge">v26.9.11.0</span></div>
 <h1>让数据库运维<br/><span class="gradient-text">可知 · 可控 · 可防</span></h1>
-<p class="sub">RaccoonX（原名 DBCheck）是一款<strong>开源、跨平台</strong>、支持 <strong>21 种</strong>主流与国产数据库的智能巡检与实时监控平台。内置 344+ 巡检规则、实时监控大屏、本地 AI 诊断与一键报告，把 DBA 的重复劳动变成一键流程。</p>
+<p class="sub">RaccoonX（原名 DBCheck）是一款<strong>开源、跨平台</strong>、支持 <strong>21 种</strong>主流与国产数据库的智能巡检与实时监控平台。内置 344+ 巡检规则、实时监控大屏、本地 AI 诊断、SQL 审核与工作流编排，把 DBA 的重复劳动变成一键流程。</p>
 <div class="hero-tags">
 <span><i class="fas fa-globe"></i> Web 界面</span>
 <span><i class="fas fa-lock"></i> 私有化部署</span>
 <span><i class="fas fa-brain"></i> 离线 AI 诊断</span>
 <span><i class="fas fa-laptop-code"></i> 跨平台</span>
+<span><i class="fas fa-user-shield"></i> SQL 审核 · 工单审批</span>
+<span><i class="fas fa-diagram-project"></i> 工作流编排</span>
 </div>
 <div class="hero-cta">
 <a class="btn btn-primary" href="https://github.com/fiyo/DBCheck" target="_blank"><i class="fab fa-github"></i> 在 GitHub 查看</a>
@@ -641,6 +643,7 @@
 <li><i class="fas fa-check"></i> 自然语言发起巡检，Web UI 内置 AI 面板，门槛更低</li>
 <li><i class="fas fa-check"></i> RAG 知识库：上传 PDF / Word / MD 自动向量化，诊断时检索最佳实践</li>
 <li><i class="fas fa-check"></i> Oracle AWR 上传即解析，生成结构化报告 + AI 诊断建议</li>
+<li><i class="fas fa-check"></i> 可选接入 BIC-QA 云端知识库，本地发现 + 远端知识互补；诊断全流程可编排为 DAG 工作流</li>
 </ul>
 </div>
 <div class="show-art">
@@ -711,7 +714,7 @@
 <div class="sec-head reveal">
 <div class="sec-tag"><i class="fas fa-book-open"></i> 功能全览</div>
 <h2>一套平台，覆盖数据库全生命周期</h2>
-<p>从智能巡检、实时监控到 AI 诊断与合规报告——以下能力均已落地（参考官方文档）。</p>
+<p>从智能巡检、实时监控到 AI 诊断、SQL 审核、工作流编排与治理审计——以下能力均已落地（参考官方文档）。</p>
 </div>
 <!-- 分类胶囊切换 -->
 <div class="feat-tabs reveal" id="featTabs" role="tablist">
@@ -720,6 +723,7 @@
 <button aria-selected="false" class="feat-tab" data-cat="2" role="tab" type="button"><span class="fic-mini"><i class="fas fa-microchip"></i></span><span>AI 与诊断</span></button>
 <button aria-selected="false" class="feat-tab" data-cat="3" role="tab" type="button"><span class="fic-mini"><i class="fas fa-file-shield"></i></span><span>报告与协作</span></button>
 <button aria-selected="false" class="feat-tab" data-cat="4" role="tab" type="button"><span class="fic-mini"><i class="fas fa-table-cells"></i></span><span>扩展与运维</span></button>
+<button aria-selected="false" class="feat-tab" data-cat="5" role="tab" type="button"><span class="fic-mini"><i class="fas fa-user-shield"></i></span><span>治理与安全</span></button>
 </div>
 <div class="feat-panel" id="featPanel">
 <!-- 0 智能巡检 -->
@@ -752,6 +756,8 @@
 <li class="feat-item glow"><span class="fic-mini"><i class="fas fa-hard-drive"></i></span><div class="fi-text"><h3>DM8 离线存储检查</h3><p>无需启动实例，直接扫描 .DBF 识别坏块（全零 / 常量填充 / 截断），支持本地与 SSH 远程。</p></div></li>
 <li class="feat-item glow"><span class="fic-mini"><i class="fas fa-users"></i></span><div class="fi-text"><h3>协同诊断中枢</h3><p>一支由五位诊断专员（监控哨兵 / 巡检分析 / 根因定位 / SQL 治理 / 锁等待分析）组成的 AI DBA 团队，在<strong>共享上下文（黑板）</strong>上串行接力、彼此印证，输出根因推断与可执行处置方案。</p></div></li>
 <li class="feat-item glow"><span class="fic-mini"><i class="fas fa-bullseye"></i></span><div class="fi-text"><h3>方案代价验证</h3><p>协同诊断中枢为每个处置方案标注执行代价、回滚风险与维护窗口提示，给出"先易后难"的执行顺序，避免盲改生产。</p></div></li>
+<li class="feat-item glow"><span class="fic-mini"><i class="fas fa-cloud"></i></span><div class="fi-text"><h3>BIC-QA 云端知识库</h3><p>本地专家产出真实发现后，自动汇总为问题检索 <strong>BIC-QA</strong> 云端知识库，补充「现象解读 / 根因排序 / 定位命令 / 处置建议」四段式知识建议；外发内容默认脱敏，未配置或服务不可达时优雅降级，绝不阻断诊断。</p></div></li>
+<li class="feat-item glow"><span class="fic-mini"><i class="fas fa-diagram-project"></i></span><div class="fi-text"><h3>工作流编排（DAG）</h3><p>把诊断专家、技能与脚本编排成<strong>有向无环图（DAG）</strong>，按拓扑序执行并支持条件分支；可视化画布上搭建「采集 → 分析 → 审批 → 处置」自动化流程，一次搭建、反复运行。</p></div></li>
 </ul>
 </div>
 <!-- 3 报告与协作 -->
@@ -778,6 +784,15 @@
 <li class="feat-item glow"><span class="fic-mini"><i class="fas fa-layer-group"></i></span><div class="fi-text"><h3>统一可观测视图</h3><p>宿主资源（eBPF / psutil / SSH）+ 数据库细粒度指标 + 巡检风险统一到同一分析平面，根因定位成为可串联的证据链。</p></div></li>
 </ul>
 </div>
+<!-- 5 治理与安全 -->
+<div class="feat-pane" data-cat="5" role="tabpanel">
+<ul class="feat-list">
+<li class="feat-item glow"><span class="fic-mini"><i class="fas fa-file-circle-check"></i></span><div class="fi-text"><h3>SQL 智能审核</h3><p>内置规则引擎自动体检慢 SQL、危险 DDL 与缺 WHERE 的 UPDATE / DELETE，标注风险等级并给出优化建议与反向恢复语句；默认只读 dry-run，真实执行必须经审批放行。</p></div></li>
+<li class="feat-item glow"><span class="fic-mini"><i class="fas fa-clipboard-check"></i></span><div class="fi-text"><h3>写操作工单闭环</h3><p>危险写操作先建工单、审批后放行（待审批 → 已批准 → 已执行 / 已驳回 / 已阻断）；UPDATE / DELETE 执行前自动快照原行落备份表，影响行数硬上限兜底，支持一键回滚。</p></div></li>
+<li class="feat-item glow"><span class="fic-mini"><i class="fas fa-clock-rotate-left"></i></span><div class="fi-text"><h3>全链路审计留痕</h3><p>执行、回滚、审批动作 append-only 落库留痕，谁在何时对哪个库做了什么全程可追溯，契合等保与内控要求。</p></div></li>
+</ul>
+</div>
+
 </div>
 </div>
 </section>
@@ -793,7 +808,7 @@
 <div class="steps stagger">
 <div class="step reveal"><div class="num">1</div><h4>接入数据源</h4><p>统一管理连接，支持分组、批量巡检、CSV 导入导出，一次配置多次使用。</p></div>
 <div class="step reveal"><div class="num">2</div><h4>智能采集</h4><p>按库执行 344+ 规则与深采指标，多实例并发采集，连接失败自动重试与退避。</p></div>
-<div class="step reveal"><div class="num">3</div><h4>风险分析</h4><p>自动识别风险并附可执行修复 SQL；本地 AI 辅助诊断，给出优化建议。</p></div>
+<div class="step reveal"><div class="num">3</div><h4>风险分析</h4><p>自动识别风险并附可执行修复 SQL；本地 AI 协同诊断，危险变更可走 SQL 审核 + 审批工单。</p></div>
 <div class="step reveal"><div class="num">4</div><h4>报告与告警</h4><p>一键生成 Word / PDF（自动脱敏），定时推送邮件 / Webhook，随时掌控。</p></div>
 </div>
 </div>
