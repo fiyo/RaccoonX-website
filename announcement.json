@@ -2,13 +2,43 @@
   "enabled": true,
   "items": [
     {
-      "icon": "🦝",
-      "text": "RaccoonX v26.9：智能诊断中心 · MCP Server · 工作流编排 · 更多功能等你体验",
+      "icon": "⭐",
+      "text": "举国同庆，盛世华诞。祝祖国生日快乐！",
+      "link": "https://raccoonx.cn",
+      "link_text": ""
+    },
+    {
+      "icon": "⭐",
+      "text": "愿祖国：山河锦绣，国盛民安，生日快乐！",
+      "link": "https://raccoonx.cn",
+      "link_text": ""
+    },
+    {
+      "icon": "⭐",
+      "text": "以青春之名，书写清澈挚爱；以心中红星，献礼盛世中华。",
+      "link": "https://raccoonx.cn",
+      "link_text": ""
+    },
+    {
+      "icon": "⭐",
+      "text": "祝祖国母亲生日快乐，愿山河无恙，人间皆安。",
+      "link": "https://raccoonx.cn",
+      "link_text": ""
+    },
+    {
+      "icon": "⭐",
+      "text": "生在红旗下，长在春风里。 目光所至皆为华夏，五星闪耀皆为信仰。",
+      "link": "https://raccoonx.cn",
+      "link_text": ""
+    },
+    {
+      "icon": "⭐",
+      "text": "千秋华夏，壮丽河山，落日余晖，璀璨星河。 祝我祖国，繁荣昌盛，万寿无疆。",
       "link": "https://raccoonx.cn",
       "link_text": "了解详情"
     },
     {
-      "icon": "⭐",
+      "icon": "🦝",
       "text": "觉得 RaccoonX 好用？去 GitHub 给我们一个 Star 吧",
       "link": "https://github.com/fiyo/DBCheck",
       "link_text": "GitHub Star"
