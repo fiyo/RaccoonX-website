@@ -39,6 +39,12 @@
     },
     {
       "icon": "🦝",
+      "text": "RaccoonX v26.9：智能诊断中心 · MCP Server · 工作流编排 · 更多功能等你体验",
+      "link": "https://raccoonx.cn",
+      "link_text": "了解详情"
+    },
+    {
+      "icon": "🦝",
       "text": "觉得 RaccoonX 好用？去 GitHub 给我们一个 Star 吧",
       "link": "https://github.com/fiyo/DBCheck",
       "link_text": "GitHub Star"
