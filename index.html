@@ -4,13 +4,13 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>RaccoonX · 开源数据库智能巡检与实时监控平台</title>
-<meta content="RaccoonX v26.10.27.0 是一款开源、跨平台、支持 22 种主流与国产数据库的智能巡检与实时监控平台。内置 836+ 巡检规则、实时监控大屏、本地 AI 诊断、SQL 审核与工作流编排，让数据库运维可知、可控、可防。" name="description"/>
+<meta content="RaccoonX v26.10.27.1 是一款开源、跨平台、支持 22 种主流与国产数据库的智能巡检与实时监控平台。内置 836+ 巡检规则、实时监控大屏、本地 AI 诊断、SQL 审核与工作流编排，让数据库运维可知、可控、可防。" name="description"/>
 <meta content="数据库巡检, 数据库监控, 信创, 国产化替代, DBA工具, Kingbase, 达梦, 优炫, UXDB, Oracle, MySQL, PostgreSQL, 开源, 数据库可观测性" name="keywords"/>
 <meta content="Jack Ge (fiyo)" name="author"/>
 <meta content="index, follow" name="robots"/>
 <!-- Open Graph -->
 <meta content="RaccoonX · 开源数据库巡检与实时监控平台" property="og:title"/>
-<meta content="开源跨平台数据库智能巡检与实时监控平台 v26.10.27.0，本地 AI 诊断、SQL 审核与工作流编排，数据不出网。" property="og:description"/>
+<meta content="开源跨平台数据库智能巡检与实时监控平台 v26.10.27.1，本地 AI 诊断、SQL 审核与工作流编排，数据不出网。" property="og:description"/>
 <meta content="website" property="og:type"/>
 <meta content="https://fiyo.github.io/DBCheck" property="og:url"/>
 <meta content="https://fiyo.github.io/DBCheck/dbcheck_logo_banner.png" property="og:image"/>
@@ -494,7 +494,7 @@
 <section class="hero">
 <div class="hero-inner">
 <div class="hero-copy">
-<div class="hero-badge"><span class="pulse"></span> 社区版 · 开源 Apache 2.0 协议 · <span id="verBadge">v26.10.27.0</span></div>
+<div class="hero-badge"><span class="pulse"></span> 社区版 · 开源 Apache 2.0 协议 · <span id="verBadge">v26.10.27.1</span></div>
 <h1>让数据库运维<br/><span class="gradient-text">可知 · 可控 · 可防</span></h1>
 <p class="sub">RaccoonX（原名 DBCheck）是一款<strong>开源、跨平台</strong>、支持 <strong>22 种</strong>主流与国产数据库的智能巡检与实时监控平台。内置 836+ 巡检规则、实时监控大屏、本地 AI 诊断、SQL 审核与工作流编排，把 DBA 的重复劳动变成一键流程。</p>
 <div class="hero-tags">
@@ -828,7 +828,7 @@
   -v dbcheck_data:/app/data \
   -v dbcheck_reports:/app/reports \
   --name dbcheck \
-  jackge12345/dbcheck:<span data-ver-tag>26.10.27.0</span></pre>
+  jackge12345/dbcheck:<span data-ver-tag>26.10.27.1</span></pre>
 <div class="hint">默认账号 admin / admin123，首次登录请修改密码；ARM64 服务器请拉取同一 tag 的 arm64 镜像。</div>
 </div>
 <div class="qs reveal">
@@ -862,13 +862,13 @@ python web_ui.py</pre>
 宿主只需满足内核 ≥ 4.x（银河麒麟 V10 SP3 为 4.19.90，完全满足）。
 </p>
 <pre>uname -m
-docker pull jackge12345/dbcheck:<span data-ver-tag>26.10.27.0</span>
+docker pull jackge12345/dbcheck:<span data-ver-tag>26.10.27.1</span>
 docker run -d -p 5003:5003 \
   --memory=2g --memory-swap=2g \
   -v dbcheck_data:/app/data \
   -v dbcheck_reports:/app/reports \
   --name raccoonx \
-  jackge12345/dbcheck:<span data-ver-tag>26.10.27.0</span></pre>
+  jackge12345/dbcheck:<span data-ver-tag>26.10.27.1</span></pre>
 <div class="hint">
 建议使用固定版本号 tag（<span class="mono">latest</span> 可能仍指向旧的单架构镜像）；
 若拉取报 <span class="mono">no matching manifest for linux/arm64</span>，换固定版本号重试即可。
@@ -900,22 +900,22 @@ DM8 达梦（走纯 Java JDBC 驱动）、崖山 YashanDB、MongoDB、Redis、Cl
 <p>v26.9.11.0 · PDF 约 10&nbsp;MB · 共 11 章，随版本持续更新。</p>
 <span class="btn btn-primary"><i class="fas fa-file-download"></i> 下载用户手册</span>
 </a>
-<a class="dl-card" data-ver-url href="https://github.com/fiyo/DBCheck/releases/download/v26.10.27.0/RaccoonX-Windows-x86_64-v26.10.27.0.zip" target="_blank" rel="noopener">
+<a class="dl-card" data-ver-url href="https://github.com/fiyo/DBCheck/releases/download/v26.10.27.1/RaccoonX-Windows-x86_64-v26.10.27.1.zip" target="_blank" rel="noopener">
 <div class="dl-ic"><i class="fab fa-windows"></i></div>
 <h4>Windows 客户端</h4>
-<p>x86_64 · <span data-ver-badge>v26.10.27.0</span> · ZIP · 解压即用，支持 Windows 10/11。</p>
+<p>x86_64 · <span data-ver-badge>v26.10.27.1</span> · ZIP · 解压即用，支持 Windows 10/11。</p>
 <span class="btn btn-primary"><i class="fab fa-windows"></i> 下载 Windows 版</span>
 </a>
-<a class="dl-card" data-ver-url href="https://github.com/fiyo/DBCheck/releases/download/v26.10.27.0/RaccoonX-macOS-arm64-v26.10.27.0.tar.gz" target="_blank" rel="noopener">
+<a class="dl-card" data-ver-url href="https://github.com/fiyo/DBCheck/releases/download/v26.10.27.1/RaccoonX-macOS-arm64-v26.10.27.1.tar.gz" target="_blank" rel="noopener">
 <div class="dl-ic"><i class="fab fa-apple"></i></div>
 <h4>macOS 客户端（arm64）</h4>
-<p>Apple 芯片 · <span data-ver-badge>v26.10.27.0</span> · tar.gz · 支持 macOS 11+。</p>
+<p>Apple 芯片 · <span data-ver-badge>v26.10.27.1</span> · tar.gz · 支持 macOS 11+。</p>
 <span class="btn btn-primary"><i class="fab fa-apple"></i> 下载 macOS arm64</span>
 </a>
-<a class="dl-card" data-ver-url href="https://github.com/fiyo/DBCheck/releases/download/v26.10.27.0/RaccoonX-macOS-x86_64-v26.10.27.0.tar.gz" target="_blank" rel="noopener">
+<a class="dl-card" data-ver-url href="https://github.com/fiyo/DBCheck/releases/download/v26.10.27.1/RaccoonX-macOS-x86_64-v26.10.27.1.tar.gz" target="_blank" rel="noopener">
 <div class="dl-ic"><i class="fab fa-apple"></i></div>
 <h4>macOS 客户端（x86_64）</h4>
-<p>Intel 芯片 · <span data-ver-badge>v26.10.27.0</span> · tar.gz · 支持 macOS 11+。</p>
+<p>Intel 芯片 · <span data-ver-badge>v26.10.27.1</span> · tar.gz · 支持 macOS 11+。</p>
 <span class="btn btn-primary"><i class="fab fa-apple"></i> 下载 macOS x86_64</span>
 </a>
 </div>
