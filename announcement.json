@@ -1,3 +1,4 @@
+
 {
   "enabled": true,
   "items": [
@@ -8,10 +9,16 @@
       "link_text": "了解详情"
     },
     {
-      "icon": "🦝",
-      "text": "觉得 RaccoonX 好用？去 GitHub 给我们一个 Star 吧",
+      "icon": "⭐",
+      "text": "觉得 RaccoonX 好用？欢迎到 GitHub 给项目一个 Star，支持开源持续发展",
       "link": "https://github.com/fiyo/DBCheck",
       "link_text": "GitHub Star"
+    },
+    {
+      "icon": "🍵",
+      "text": "写代码之外，也认真经营生活：精选养生茶与日常好物，欢迎逛逛维护者的小店",
+      "link": "https://shop357542888.taobao.com",
+      "link_text": "逛逛小店"
     }
   ]
 }
