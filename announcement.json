@@ -4,7 +4,7 @@
   "items": [
     {
       "icon": "🦝",
-      "text": "RaccoonX v26.11.9.0：巡检规则 839+ · 菜单精简 · MCP 写审批 · 更多功能等你体验",
+      "text": "RaccoonX v26.11.9.1：巡检规则 839+ · 菜单精简 · MCP 写审批 · 更多功能等你体验",
       "link": "https://raccoonx.cn",
       "link_text": "了解详情"
     },
@@ -18,7 +18,13 @@
       "icon": "🍵",
       "text": "写代码之外，也认真经营生活：精选养生茶与日常好物，欢迎逛逛维护者的小店",
       "link": "https://shop357542888.taobao.com",
-      "link_text": "逛逛小店"
+      "link_text": "进小店逛逛"
+    },
+    {
+      "icon": "🍵",
+      "text": "精彩生活从内衣开始：专为男士打造的舒适内衣，欢迎内衣小店",
+      "link": "https://6ifsxnlc3xrtepetvlhl1fy25dabqfk.taobao.com/search.htm?spm=a1z10.1-c.0.0.4fabe5cbSUNlTz&search=y",
+      "link_text": "进小店逛逛"
     }
   ]
 }
