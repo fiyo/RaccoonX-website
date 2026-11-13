@@ -4,7 +4,7 @@
   "items": [
     {
       "icon": "🦝",
-      "text": "RaccoonX v26.11.13.0：Linux 客户端首发（麒麟 V10 / 统信 UOS 可用）· 监控大屏重构 · 839+ 巡检规则",
+      "text": "RaccoonX v26.11.13.1：Linux aarch64 原生包首发（鲲鹏 / 飞腾免 Docker）· 修复 JDBC 打包隐患 · 839+ 巡检规则",
       "link": "https://raccoonx.cn",
       "link_text": "了解详情"
     },
