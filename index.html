@@ -434,9 +434,14 @@
     .contrib-wall[hidden]{display:none}
     .contrib-head{display:flex;align-items:center;gap:10px;margin-bottom:16px;color:#FFD0B0;font-size:15px;font-weight:600}
     .contrib-head i{font-size:16px}
+    .contrib-group+.contrib-group{margin-top:18px}
+    .contrib-group-title{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:12px;font-weight:600;color:#FFD0B0}
+    .contrib-group-num{color:rgba(255,208,176,.65);font-variant-numeric:tabular-nums}
     .contrib-avatars{display:flex;flex-wrap:wrap;gap:12px}
     .contrib-chip{display:inline-flex;align-items:center;gap:8px;padding:6px 13px 6px 6px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(255,255,255,.07);color:var(--on-dark);font-size:13px;text-decoration:none;transition:background .2s,border-color .2s,transform .2s}
     .contrib-chip:hover{background:rgba(255,255,255,.16);border-color:rgba(255,122,61,.6);transform:translateY(-2px)}
+    .contrib-chip.kind-code{border-color:rgba(255,122,61,.5);background:rgba(255,122,61,.12)}
+    .contrib-chip .contrib-author-tag{padding:1px 5px;border-radius:4px;background:rgba(255,122,61,.22);color:#FFD0B0;font-size:11px;font-weight:600}
     .contrib-chip img{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.14);object-fit:cover}
     .contrib-note{margin-top:12px;color:var(--on-dark-2);font-size:12px;line-height:1.7}
     .contrib-note a{color:#FFD0B0;text-decoration:none}
@@ -1197,9 +1202,16 @@ DM8 达梦（走纯 Java JDBC 驱动）、崖山 YashanDB、MongoDB、Redis、Cl
 <a class="btn btn-ghost" href="mailto:sdfiyon@gmail.com"><i class="fas fa-envelope"></i> 邮件联系 sdfiyon@gmail.com</a>
 </div>
 <div class="contrib-wall" id="contrib-wall" hidden>
-<div class="contrib-head"><i class="fas fa-code-branch"></i><span>也谢谢这些一起把代码写出来、把问题找出来的人</span></div>
-<div class="contrib-avatars" id="contrib-avatars"></div>
-<p class="contrib-note">代码提交、Issue 反馈与文档建议都算贡献；只记 GitHub 昵称，不排名、不计数。想移除名字，提个 issue 或来信即可。<a href="https://github.com/fiyo/DBCheck/graphs/contributors" target="_blank">在 GitHub 查看完整记录 →</a></p>
+<div class="contrib-head"><i class="fas fa-code-branch"></i><span>也谢谢这些让项目变好的人</span></div>
+<div class="contrib-group">
+<div class="contrib-group-title">代码 / PR 贡献者 <span class="contrib-group-num" id="contrib-code-num"></span></div>
+<div class="contrib-avatars" id="contrib-code-avatars"></div>
+</div>
+<div class="contrib-group">
+<div class="contrib-group-title">Issue 反馈者 <span class="contrib-group-num" id="contrib-issue-num"></span></div>
+<div class="contrib-avatars" id="contrib-issue-avatars"></div>
+</div>
+<p class="contrib-note">两类贡献分开列，只记 GitHub 昵称，不排名、不计数。想移除名字，提个 issue 或来信即可。<a href="https://github.com/fiyo/DBCheck/graphs/contributors" target="_blank">在 GitHub 查看完整记录 →</a></p>
 </div>
 </div>
 </div>
@@ -1595,19 +1607,23 @@ DM8 达梦（走纯 Java JDBC 驱动）、崖山 YashanDB、MongoDB、Redis、Cl
   // 贡献者徽章墙：与捐赠名单完全分离的数据源与叙事，只记名、不排名、不计数
   (function(){
     var wall = document.getElementById('contrib-wall');
-    var box = document.getElementById('contrib-avatars');
-    if(!wall || !box) return;
+    var boxCode = document.getElementById('contrib-code-avatars');
+    var boxIssue = document.getElementById('contrib-issue-avatars');
+    if(!wall || !boxCode || !boxIssue) return;
     fetch('contributors.json', {cache:'no-store'})
       .then(function(r){ if(!r.ok) throw new Error('http ' + r.status); return r.json(); })
       .then(function(d){
         var people = (d && d.enabled && Array.isArray(d.names)) ? d.names : [];
         if(!people.length) return;
+        var counts = {code:0, issue:0};
         people.forEach(function(p){
           var login = String(p && p.login || '').trim();
           if(!login || !/^[A-Za-z0-9_.-]+$/.test(login)) return;   // 只放行合法 GitHub 登录名
+          var kind = (p && p.kind === 'code') ? 'code' : 'issue';
+          var box = (kind === 'code') ? boxCode : boxIssue;
           var url = 'https://github.com/' + login;                 // 不采信远程 url 字段，本地拼装防跳转钓鱼
           var a = document.createElement('a');
-          a.className = 'contrib-chip';
+          a.className = 'contrib-chip kind-' + kind;
           a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer';
           var img = document.createElement('img');
           img.src = 'https://avatars.githubusercontent.com/' + login + '?s=56&v=4';
@@ -1616,9 +1632,20 @@ DM8 达梦（走纯 Java JDBC 驱动）、崖山 YashanDB、MongoDB、Redis、Cl
           var span = document.createElement('span');
           span.textContent = login;                               // 远程内容只走 textContent
           a.appendChild(img); a.appendChild(span);
+          if(p && p.is_author === true){
+            var tag = document.createElement('span');
+            tag.className = 'contrib-author-tag';
+            tag.textContent = '作者';
+            a.appendChild(tag);
+          }
           box.appendChild(a);
+          counts[kind]++;
         });
-        if(box.children.length) wall.hidden = false;
+        ['code','issue'].forEach(function(k){
+          var num = document.getElementById('contrib-' + k + '-num');
+          if(num) num.textContent = '(' + counts[k] + ')';
+        });
+        if(boxCode.children.length || boxIssue.children.length) wall.hidden = false;
       })
       .catch(function(){ /* 静默降级 */ });
   })();
