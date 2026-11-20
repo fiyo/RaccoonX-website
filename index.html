@@ -429,6 +429,18 @@
     .community .sec-head h2{color:#fff}
     .community .sec-head p{color:var(--on-dark-2)}
     .community .sec-tag{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);color:#FFD0B0}
+    /* 贡献者徽章墙：只记名不排名，与被赞助名单物理分区 */
+    .contrib-wall{margin-top:30px;position:relative;z-index:2}
+    .contrib-wall[hidden]{display:none}
+    .contrib-head{display:flex;align-items:center;gap:10px;margin-bottom:16px;color:#FFD0B0;font-size:15px;font-weight:600}
+    .contrib-head i{font-size:16px}
+    .contrib-avatars{display:flex;flex-wrap:wrap;gap:12px}
+    .contrib-chip{display:inline-flex;align-items:center;gap:8px;padding:6px 13px 6px 6px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(255,255,255,.07);color:var(--on-dark);font-size:13px;text-decoration:none;transition:background .2s,border-color .2s,transform .2s}
+    .contrib-chip:hover{background:rgba(255,255,255,.16);border-color:rgba(255,122,61,.6);transform:translateY(-2px)}
+    .contrib-chip img{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.14);object-fit:cover}
+    .contrib-note{margin-top:12px;color:var(--on-dark-2);font-size:12px;line-height:1.7}
+    .contrib-note a{color:#FFD0B0;text-decoration:none}
+    @media(max-width:640px){.contrib-avatars{gap:8px}.contrib-chip{font-size:12px;padding:5px 10px 5px 5px}.contrib-chip img{width:24px;height:24px}}
 
     /* ---------- CTA ---------- */
     .cta-box{background:linear-gradient(120deg,var(--red),var(--primary) 55%,var(--primary-2));color:#fff;border-radius:var(--radius-lg);padding:56px 40px;text-align:center;box-shadow:var(--shadow-lg);position:relative;overflow:hidden;background-size:200% 200%;animation:flow 8s ease infinite}
@@ -1184,6 +1196,11 @@ DM8 达梦（走纯 Java JDBC 驱动）、崖山 YashanDB、MongoDB、Redis、Cl
 <a class="btn btn-primary" href="https://github.com/fiyo/DBCheck" target="_blank"><i class="fab fa-github"></i> 在 GitHub 查看</a>
 <a class="btn btn-ghost" href="mailto:sdfiyon@gmail.com"><i class="fas fa-envelope"></i> 邮件联系 sdfiyon@gmail.com</a>
 </div>
+<div class="contrib-wall" id="contrib-wall" hidden>
+<div class="contrib-head"><i class="fas fa-code-branch"></i><span>也谢谢这些一起把代码写出来、把问题找出来的人</span></div>
+<div class="contrib-avatars" id="contrib-avatars"></div>
+<p class="contrib-note">代码提交、Issue 反馈与文档建议都算贡献；只记 GitHub 昵称，不排名、不计数。想移除名字，提个 issue 或来信即可。<a href="https://github.com/fiyo/DBCheck/graphs/contributors" target="_blank">在 GitHub 查看完整记录 →</a></p>
+</div>
 </div>
 </div>
 </div>
@@ -1574,6 +1591,37 @@ DM8 达梦（走纯 Java JDBC 驱动）、崖山 YashanDB、MongoDB、Redis、Cl
       revealNames(wall);
     })
     .catch(function(){ /* 静默降级 */ });
+
+  // 贡献者徽章墙：与捐赠名单完全分离的数据源与叙事，只记名、不排名、不计数
+  (function(){
+    var wall = document.getElementById('contrib-wall');
+    var box = document.getElementById('contrib-avatars');
+    if(!wall || !box) return;
+    fetch('contributors.json', {cache:'no-store'})
+      .then(function(r){ if(!r.ok) throw new Error('http ' + r.status); return r.json(); })
+      .then(function(d){
+        var people = (d && d.enabled && Array.isArray(d.names)) ? d.names : [];
+        if(!people.length) return;
+        people.forEach(function(p){
+          var login = String(p && p.login || '').trim();
+          if(!login || !/^[A-Za-z0-9_.-]+$/.test(login)) return;   // 只放行合法 GitHub 登录名
+          var url = 'https://github.com/' + login;                 // 不采信远程 url 字段，本地拼装防跳转钓鱼
+          var a = document.createElement('a');
+          a.className = 'contrib-chip';
+          a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+          var img = document.createElement('img');
+          img.src = 'https://avatars.githubusercontent.com/' + login + '?s=56&v=4';
+          img.alt = ''; img.loading = 'lazy';
+          img.onerror = function(){ this.style.display = 'none'; };
+          var span = document.createElement('span');
+          span.textContent = login;                               // 远程内容只走 textContent
+          a.appendChild(img); a.appendChild(span);
+          box.appendChild(a);
+        });
+        if(box.children.length) wall.hidden = false;
+      })
+      .catch(function(){ /* 静默降级 */ });
+  })();
 })();
 </script>
 </div>
